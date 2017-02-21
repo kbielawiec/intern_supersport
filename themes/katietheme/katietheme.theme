@@ -1,0 +1,156 @@
+  <?php
+
+  /**
+  * @file
+  * Preprocess functions for katietheme.
+  */
+
+  use Drupal\Core\Cache\CacheableMetadata;
+
+
+  /**
+  * Prepares variables for the html.html.twig template.
+  */
+  function katietheme_preprocess_html(&$variables) {
+  try {
+    $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
+  }
+  catch (Exception $e) {
+    // If the database is not yet available, set default values for these
+    // variables.
+    $variables['is_front'] = FALSE;
+  }
+
+  // If we're on the front page.
+  if (!$variables['is_front']) {
+    // Add unique classes for each page and website section.
+    $path = \Drupal::service('path.current')->getPath();
+    $alias = \Drupal::service('path.alias_manager')->getAliasByPath($path);
+    $alias = trim($alias, '/');
+    if (!empty($alias)) {
+      $name = str_replace('/', '-', $alias);
+      $variables['attributes']['class'][] = 'page-' . $name;
+      list($section,) = explode('/', $alias, 2);
+      if (!empty($section)) {
+        $variables['attributes']['class'][] = 'section-' . $section;
+      }
+    }
+  }
+
+  // Add cachability metadata.
+  $theme_name = \Drupal::theme()->getActiveTheme()->getName();
+  $theme_settings = \Drupal::config($theme_name . '.settings');
+  CacheableMetadata::createFromRenderArray($variables)
+    ->addCacheableDependency($theme_settings)
+    ->applyTo($variables);
+  // Union all theme setting variables to the html.html.twig template.
+  $variables += $theme_settings->getOriginal();
+  }
+
+  /**
+  * Prepares variables for the field.html.twig template.
+  */
+  function katietheme_preprocess_field(&$variables, $hook) {
+  // Make additional variables available to the template.
+  $variables['bundle'] = $variables['element']['#bundle'];
+  }
+
+  /*
+  * Enable jQuery
+  */
+  function katietheme_page_alter(&$page) {
+  $page['#attached']['library'][] = 'core/jquery';
+  }
+
+  /**
+  * Prepares variables for taxonomy term templates.
+  *
+  * Default template: taxonomy-term.html.twig.
+  *
+  * @param array $variables
+  *   An associative array containing:
+  *   - elements: An associative array containing the taxonomy term and any
+  *     fields attached to the term. Properties used:
+  *     - #taxonomy_term: A \Drupal\taxonomy\TermInterface object.
+  *     - #view_mode: The current view mode for this taxonomy term, e.g.
+  *       'full' or 'teaser'.
+  *   - attributes: HTML attributes for the containing element.
+  */
+  function katietheme_preprocess_taxonomy_term(&$variables) {
+
+    /*
+        SELECT node_field_data.created AS node_field_data_created,
+               node_field_data.nid AS nid,
+               taxonomy_term_field_data_node__field_team_association.tid AS taxonomy_term_field_data_node__field_team_association_tid
+        FROM {node_field_data} node_field_data
+        LEFT JOIN {node__field_team_association}
+                   node__field_team_association ON node_field_data.nid = node__field_team_association.entity_id AND
+                  (node__field_team_association.deleted = '0' AND node__field_team_association.langcode = node_field_data.langcode)
+        INNER JOIN {taxonomy_term_field_data}
+                    taxonomy_term_field_data_node__field_team_association
+                    ON node__field_team_association.field_team_association_target_id = taxonomy_term_field_data_node__field_team_association.tid
+        WHERE (( (node__field_team_association.field_team_association_target_id = '2' ) )AND
+              (( (node_field_data.status = '1') AND (node_field_data.type IN  ('sportsblog')) )))
+        ORDER BY node_field_data_created DESC
+        LIMIT 1 OFFSET 0;
+       */
+       //select e.nid, t.nid from example as e join term t where t.name="tag"
+      /*
+       $connection = Database::getConnection();
+       $sth = $connection->select('node_field_data', 'node_field_data')
+                         ->addField(node_field_data.created,'node_field_data_created')
+                         ->addField(node_field_data.nid, nid)
+                         ->addField(taxonomy_term_field_data_node__field_team_association.tid,
+                                  taxonomy_term_field_data_node__field_team_association_tid)
+                         ->condition('node__field_team_association.field_team_association_target_id','2', '=')
+                         ->orderBy('node_field_data_ceated', 'DESC')
+                         ->range(0,1);
+        $data = $sth->execute();
+        $result = $data->fetchAll(\PDO::FETCH_OBJ);
+        */
+
+    $term = $variables['elements']['#taxonomy_term'];
+    $tid  = $term->get('tid')->value;
+
+        $query = \Drupal::database()->select('node_field_data', 'nfd');
+        $query->fields('nfd', array('created','nid', 'type', 'title'));
+        $query->addField('tterm','tid','taxonomy_term_field_data_node__field_team_association_target_id');
+        $alias = $query->leftJoin('node__field_team_association','nfta', 'nfd.nid = %alias.entity_id AND
+                               %alias.deleted = 0 AND %alias.langcode = nfd.langcode');
+        $alias = $query->innerJoin('taxonomy_term_field_data', 'tterm', 'nfta.field_team_association_target_id = %alias.tid');
+        //need to replace 2 with having it equal the proper term; this is just a test
+        $query->condition('nfta.field_team_association_target_id', $tid);
+        $query->condition('nfd.status', 1);
+        // 'IN', 'NOT IN': These operators expect $value to be an array of literals of the same type as the column
+        $query->condition('nfd.type', 'sportsblog');
+        $query->orderBy('nfd.created', 'DESC');
+        $query->range(0,1);
+        $blog_post = $query->execute()->fetchObject();
+        //dpr((string)$blog_post->title);
+        $result = NULL;
+        $res2 = NULL;
+        if(is_object($blog_post)) {
+            $result = $blog_post->title;
+            $res2 = $blog_post->nid;
+        }
+
+        $options = ['absolute' => TRUE];
+        $url = \Drupal\Core\Url::fromRoute('entity.node.canonical', ['node' => (int)$res2], $options);
+        $url = $url->toString();
+
+        $variables['recent_post'] = $result;
+        $variables['recent_post_url'] = $url;
+        //return $result;
+
+
+
+
+  }
+
+
+
+
+
+
+
+

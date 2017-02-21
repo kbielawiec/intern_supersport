@@ -1,0 +1,58 @@
+{#
+/**
+ * @file
+ * Theme override to display an NFL taxonomy term.
+ *
+ * Available variables:
+ * - url: URL of the current term.
+ * - name: Name of the current term.
+ * - content: Items for the content of the term (fields and description).
+ *   Use 'content' to print them all, or print a subset such as
+ *   'content.description'. Use the following code to exclude the
+ *   printing of a given child element:
+ *   @code
+ *   {{ content|without('description') }}
+ *   @endcode
+ * - attributes: HTML attributes for the wrapper.
+ * - page: Flag for the full page state.
+ * - term: The taxonomy term entity, including:
+ *   - id: The ID of the taxonomy term.
+ *   - bundle: Machine name of the current vocabulary.
+ * - view_mode: View mode, e.g. 'full', 'teaser', etc.
+ *
+ * @see template_preprocess_taxonomy_term()
+ */
+#}
+{#{{ dump() }}#}
+{#{{ dump(_context|keys ) }}#}
+{#{{ kint(recent_post|keys) }}#}
+<div{{ attributes }} class="vocab-square">
+  {{ title_prefix }}
+  {% if not page %}
+    {#<h2><a href="{{ url }}">{{ name }}</a></h2>#}
+      <table class="term">
+          <tr>
+              <td class="team-logo">{{ content.field_team_logo }}</td>
+              <td>
+                  <h3 class="team-name"><a href="{{ url }}">{{ name }}</a></h3>
+                  <p class="tax-term">{{ term.bundle }}</p>
+              </td>
+          </tr>
+          <tr>
+              <td class="fav-button" colspan="2">
+                <button class="favorites" onclick=''>
+                Add Favorite
+                </button>
+              </td>
+          </tr>
+          <tr>
+
+              <td colspan="2">
+                  {#<a href="{{ path('entity.node.canonical', {'node': recent_post_id }) }}">{{ recent_post }}</a>#}
+                  <a href="{{ recent_post_url }}">{{ recent_post }}</a>
+
+              </td>
+      </table>
+
+  {% endif %}
+</div>

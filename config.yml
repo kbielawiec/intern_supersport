@@ -27,6 +27,9 @@ vagrant_synced_folders:
     destination: /var/www/drupalvm
     type: rsync
     create: true
+    excluded_paths:
+      - /sites/default/files
+
 
 # Memory and CPU to use for this VM.
 vagrant_memory: 1024

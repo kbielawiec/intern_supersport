@@ -168,7 +168,7 @@ class DateTimePlus {
    *   If the timestamp is not numeric.
    */
   public static function createFromTimestamp($timestamp, $timezone = NULL, $settings = array()) {
-    if (!is_numeric($timestamp)) {
+      if (!is_numeric($timestamp)) {
       throw new \Exception('The timestamp must be numeric.');
     }
     $datetime = new static('', $timezone, $settings);

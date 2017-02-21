@@ -1,0 +1,22 @@
+/* line 4, ../../../bourbon/node_modules/bourbon-neat/app/assets/stylesheets/grid/_box-sizing.scss */
+html {
+  box-sizing: border-box; }
+
+/* line 9, ../../../bourbon/node_modules/bourbon-neat/app/assets/stylesheets/grid/_box-sizing.scss */
+*, *::after, *::before {
+  box-sizing: inherit; }
+
+/* line 4, ../../sass/components/tabs.sass */
+ul.tabs {
+  width: 100%;
+  margin: 0 0 5px;
+  border-bottom: 1px solid #ddd; }
+  /* line 9, ../../sass/components/tabs.sass */
+  ul.tabs li {
+    display: inline-block; }
+  /* line 12, ../../sass/components/tabs.sass */
+  ul.tabs a {
+    display: block;
+    border: 1px solid #ddd;
+    border-bottom: 0;
+    border-radius: 3px 3px 0 0; }
