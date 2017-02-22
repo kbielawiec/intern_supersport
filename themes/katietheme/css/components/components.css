@@ -11,32 +11,32 @@ html {
   list-style-type: none;
   display: inline-block; }
 
-/* line 5, ../../sass/components/_navigation.sass */
+/* line 3, ../../sass/components/_navigation.sass */
 #navigation li {
   list-style-type: none;
   display: inline-block; }
 
-/* line 9, ../../sass/components/_navigation.sass */
+/* line 8, ../../sass/components/_navigation.sass */
 #block-katietheme-main-menu ul.menu {
   list-style-type: none;
-  padding: 0;
+  padding-bottom: 0;
   margin-bottom: 20px;
   overflow: hidden;
   background-color: slategrey;
   position: fixed;
-  top: 0;
+  top: 79px;
   width: 100%;
   z-index: 99999; }
-  /* line 19, ../../sass/components/_navigation.sass */
+  /* line 18, ../../sass/components/_navigation.sass */
   #block-katietheme-main-menu ul.menu li.menu-item {
     float: left; }
-    /* line 21, ../../sass/components/_navigation.sass */
+    /* line 20, ../../sass/components/_navigation.sass */
     #block-katietheme-main-menu ul.menu li.menu-item .is-active {
       background-color: #06c; }
-    /* line 23, ../../sass/components/_navigation.sass */
+    /* line 22, ../../sass/components/_navigation.sass */
     #block-katietheme-main-menu ul.menu li.menu-item:hover {
       background-color: #06c; }
-    /* line 25, ../../sass/components/_navigation.sass */
+    /* line 24, ../../sass/components/_navigation.sass */
     #block-katietheme-main-menu ul.menu li.menu-item a {
       display: block;
       text-align: center;
@@ -45,12 +45,25 @@ html {
       font-weight: bold;
       color: whitesmoke; }
 
+/* line 32, ../../sass/components/_navigation.sass */
+li.menu-item {
+  float: right; }
+  /* line 34, ../../sass/components/_navigation.sass */
+  li.menu-item a {
+    padding-left: 10px; }
+
 /* line 2, ../../sass/components/_site-name.sass */
+#block-katietheme-branding {
+  position: relative;
+  top: 30px;
+  padding-bottom: 20px; }
+
+/* line 6, ../../sass/components/_site-name.sass */
 .site-info {
   display: inline-block;
   vertical-align: bottom; }
 
-/* line 6, ../../sass/components/_site-name.sass */
+/* line 10, ../../sass/components/_site-name.sass */
 .site-name {
   display: inline;
   font-size: 2.2em;
@@ -58,15 +71,15 @@ html {
   font-weight: 300;
   padding: 0.5em 0 0.5em;
   margin: 0; }
-  /* line 13, ../../sass/components/_site-name.sass */
+  /* line 17, ../../sass/components/_site-name.sass */
   .site-name a {
     vertical-align: bottom; }
 
-/* line 15, ../../sass/components/_site-name.sass */
+/* line 19, ../../sass/components/_site-name.sass */
 .site-slogan {
   font-style: italic; }
 
-/* line 19, ../../sass/components/_site-name.sass */
+/* line 23, ../../sass/components/_site-name.sass */
 .site-logo img {
   width: 200px; }
 

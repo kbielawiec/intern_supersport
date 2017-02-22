@@ -19,7 +19,8 @@ class CaseStudiesForm extends FormBase {
     /**
      * {@inheritdoc}
      */
-    public function getFormId() {
+    public function getFormId()
+    {
         return 'casestudies_form';
     }
 
@@ -42,7 +43,7 @@ class CaseStudiesForm extends FormBase {
         //Go through every case studies link
         //echo("Is anybody there?? <br>");
         foreach ($html->find('div[class*=views-field-field-photo]') as $project) {
-           // echo("Outer loop $n <br>"); //currently looping 21 times
+            // echo("Outer loop $n <br>"); //currently looping 21 times
             $n = $n + 1;
             //for every link in the case study (should only be one, try to get rid of the nested loops
             foreach ($project->find('a') as $url) {
@@ -56,30 +57,30 @@ class CaseStudiesForm extends FormBase {
                 //echo("t_text is $t_text <br>");
                 $b = $html_project->find('div[id=md2]'); //body
                 $b_text = $b[0]->innertext;
-               //echo("body is $b_text <br>");
+                //echo("body is $b_text <br>");
                 $s = $html_project->find('div[id=md3]'); //success
-//                for ($i = 0; $i < count($s); $i++)
-//                {
-//                    echo("s array is $s[$i] <br>");
-//                }
-                if ($s != NULL) {
+                //for ($i = 0; $i < count($s); $i++)
+                //{
+                //  echo("s array is $s[$i] <br>");
+                //}
+                if ($s != null) {
                     $s_text = $s[0]->last_child()->innertext;
                 } else {
                     //echo("getting in there 1 <br>");
                     $s_1 = $html_project->find('div[class=field--name-field-solution]');
-                    if ($s_1 == NULL) {
+                    if ($s_1 == null) {
                         //echo("null 1 <br>");
                         $s_text = 'no content';
                     } else {
                         //echo("getting in there 2 <br>");
                         $s_2 = $s_1[0]->find('p', -1);
-                        if ($s_2 == NULL) {
+                        if ($s_2 == null) {
                             $s_text = 'no content';
                             //echo("null 2 <br>");
                         } else {
                             //echo("getting in there 3 <br>");
                             $s_text = $s_2->innertext;
-                            if ($s_text == NULL) {
+                            if ($s_text == null) {
                                 $s_text = 'no content';
                                 //echo("null 3 <br>");
                             }
@@ -122,35 +123,36 @@ class CaseStudiesForm extends FormBase {
      * {@inheritdoc}
      * Optional.
      */
-    public function validateForm(array &$form, FormStateInterface $form_state) {
+    public function validateForm(array &$form, FormStateInterface $form_state)
+    {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function submitForm(array &$form, FormStateInterface $form_state) {
+    public function submitForm(array &$form, FormStateInterface $form_state)
+    {
         $t = "default";
         $complete_form = &$form_state->getCompleteForm();
         $all_rows = &$form_state->getValues();
-//        drupal_set_message(t(gettype($all_rows['table'][7])), 'status'); //array
-//        dpm($complete_form);
         $i = 0;
-        foreach($all_rows['table'] as $value){
-            if($all_rows[$i] != '0'){  // why doesnt this work with checking $value
+        foreach ($all_rows['table'] as $value) {
+            if ($all_rows['table'][$i] != 0) {
                 $t = $complete_form['table']['#options'][$i]['title'];
                 $b = $complete_form['table']['#options'][$i]['body'];
                 $s = $complete_form['table']['#options'][$i]['success'];
-                $node = Node::create(array(
+                $node = Node::create( array(
                     'type' => 'myform',
                     'title' => $t,
                     'body' => $b,
                     'field_success' => $s,
                     'status' => 1,
                     'promoted' => 1
-                ));
+                    )
+                );
                 $node->save();
             }
-            $i++; //keeps track of the current index
+            $i++; // keeps track of the current index
         }
     }
 
