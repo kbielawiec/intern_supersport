@@ -129,6 +129,12 @@ class CaseStudiesForm extends FormBase {
 
     /**
      * {@inheritdoc}
+     * Function called when form is submitted
+     *
+     * @param array $form
+     * Form being submitted.
+     * @param \Drupal\Core\Form\FormStateInterface $form_state
+     * State of the form.
      */
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
@@ -141,19 +147,20 @@ class CaseStudiesForm extends FormBase {
                 $t = $complete_form['table']['#options'][$i]['title'];
                 $b = $complete_form['table']['#options'][$i]['body'];
                 $s = $complete_form['table']['#options'][$i]['success'];
-                $node = Node::create( array(
+                $node = Node::create(array(
                     'type' => 'myform',
                     'title' => $t,
                     'body' => $b,
                     'field_success' => $s,
                     'status' => 1,
                     'promoted' => 1
-                    )
+                  )
                 );
                 $node->save();
             }
             $i++; // keeps track of the current index
         }
+        $form_state->setRedirect('<front>'); // redirect back to homepage after submit
     }
 
 }
