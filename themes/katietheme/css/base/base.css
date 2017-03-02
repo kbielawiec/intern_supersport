@@ -40,19 +40,19 @@ button {
 
 /* line 36, ../../sass/base/_buttons.sass */
 button.favorites {
-  color: #06c;
   background-color: transparent;
+  width: 100%;
   border: 2px solid #06c;
-  border-radius: 4px;
-  padding: 5% 25%; }
-  /* line 43, ../../sass/base/_buttons.sass */
+  border-radius: 4px; }
+  /* line 41, ../../sass/base/_buttons.sass */
+  button.favorites a {
+    color: #06c; }
+  /* line 44, ../../sass/base/_buttons.sass */
   button.favorites:hover, button.favorites:focus {
-    background-color: #444444;
-    color: #fff; }
-  /* line 47, ../../sass/base/_buttons.sass */
-  button.favorites:hover {
-    background-color: #06c;
-    color: white; }
+    background-color: #06c; }
+    /* line 47, ../../sass/base/_buttons.sass */
+    button.favorites:hover a, button.favorites:focus a {
+      color: #fff; }
 
 /* line 2, ../../sass/base/_forms.sass */
 fieldset {
@@ -196,63 +196,37 @@ th {
   line-height: 1;
   padding: 0.75em 0;
   margin: 0; }
-  /* line 33, ../../sass/base/_tables.sass */
-  tr .team-logo,
-  td .team-logo,
-  th .team-logo {
-    width: 25%;
-    vertical-align: top; }
-  /* line 36, ../../sass/base/_tables.sass */
-  tr td.fav-button,
-  td td.fav-button,
-  th td.fav-button {
-    text-align: center;
-    padding: 0;
-    margin: 0; }
-  /* line 40, ../../sass/base/_tables.sass */
-  tr td.team-logo,
-  td td.team-logo,
-  th td.team-logo {
-    width: 30%; }
-  /* line 43, ../../sass/base/_tables.sass */
+  /* line 34, ../../sass/base/_tables.sass */
   tr h3.team-name,
   td h3.team-name,
   th h3.team-name {
     margin: 0;
     padding: 0; }
-  /* line 47, ../../sass/base/_tables.sass */
+  /* line 38, ../../sass/base/_tables.sass */
   tr td.blog-img,
   td td.blog-img,
   th td.blog-img {
     vertical-align: top;
     width: 25%; }
-  /* line 53, ../../sass/base/_tables.sass */
-  tr p.tax-term,
-  td p.tax-term,
-  th p.tax-term {
-    text-transform: uppercase;
-    vertical-align: top;
-    display: inline-block;
-    padding: 0; }
-  /* line 59, ../../sass/base/_tables.sass */
+  /* line 44, ../../sass/base/_tables.sass */
   tr p.blog-content,
   td p.blog-content,
   th p.blog-content {
     display: inline-block;
     line-height: 1.5em;
     max-height: 4.5em; }
-  /* line 64, ../../sass/base/_tables.sass */
+  /* line 49, ../../sass/base/_tables.sass */
   tr div.quickedit-field,
   td div.quickedit-field,
   th div.quickedit-field {
     display: inline-block;
     padding: 0; }
-  /* line 68, ../../sass/base/_tables.sass */
+  /* line 53, ../../sass/base/_tables.sass */
   tr div.data,
   td div.data,
   th div.data {
     padding-bottom: 5px; }
-    /* line 70, ../../sass/base/_tables.sass */
+    /* line 55, ../../sass/base/_tables.sass */
     tr div.data div.team-name,
     td div.data div.team-name,
     th div.data div.team-name {

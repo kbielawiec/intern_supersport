@@ -148,12 +148,48 @@ html {
       /* line 81, ../../sass/layout/_layout--grid.sass */
       .one-sidebar.sidebar-first #sidebar-first {
         margin-left: -102.12766%; } }
+  /* line 83, ../../sass/layout/_layout--grid.sass */
+  #sidebar-first .col-1 {
+    width: 8.33%; }
+  /* line 85, ../../sass/layout/_layout--grid.sass */
+  #sidebar-first .col-2 {
+    width: 16.66%; }
+  /* line 87, ../../sass/layout/_layout--grid.sass */
+  #sidebar-first .col-3 {
+    width: 25%; }
+  /* line 89, ../../sass/layout/_layout--grid.sass */
+  #sidebar-first .col-4 {
+    width: 33.33%; }
+  /* line 91, ../../sass/layout/_layout--grid.sass */
+  #sidebar-first .col-5 {
+    width: 41.66%; }
+  /* line 93, ../../sass/layout/_layout--grid.sass */
+  #sidebar-first .col-6 {
+    width: 50%; }
+  /* line 95, ../../sass/layout/_layout--grid.sass */
+  #sidebar-first .col-7 {
+    width: 58.33%; }
+  /* line 97, ../../sass/layout/_layout--grid.sass */
+  #sidebar-first .col-8 {
+    width: 66.66%; }
+  /* line 99, ../../sass/layout/_layout--grid.sass */
+  #sidebar-first .col-9 {
+    width: 75%; }
+  /* line 101, ../../sass/layout/_layout--grid.sass */
+  #sidebar-first .col-10 {
+    width: 83.33%; }
+  /* line 103, ../../sass/layout/_layout--grid.sass */
+  #sidebar-first .col-11 {
+    width: 91.66%; }
+  /* line 105, ../../sass/layout/_layout--grid.sass */
+  #sidebar-first .col-12 {
+    width: 100%; }
 
-/* line 84, ../../sass/layout/_layout--grid.sass */
+/* line 108, ../../sass/layout/_layout--grid.sass */
 #sidebar-second {
   width: 100%; }
   @media screen and (min-width: 45em) {
-    /* line 84, ../../sass/layout/_layout--grid.sass */
+    /* line 108, ../../sass/layout/_layout--grid.sass */
     #sidebar-second {
       float: left;
       display: block;
@@ -164,7 +200,7 @@ html {
       #sidebar-second:last-child {
         margin-right: 0; } }
   @media screen and (min-width: 60em) {
-    /* line 84, ../../sass/layout/_layout--grid.sass */
+    /* line 108, ../../sass/layout/_layout--grid.sass */
     #sidebar-second {
       float: left;
       display: block;
@@ -175,19 +211,19 @@ html {
       #sidebar-second:last-child {
         margin-right: 0; } }
 
-/* line 96, ../../sass/layout/_layout--grid.sass */
+/* line 120, ../../sass/layout/_layout--grid.sass */
 #footer {
   float: none;
   clear: both; }
 
-/* line 101, ../../sass/layout/_layout--grid.sass */
+/* line 125, ../../sass/layout/_layout--grid.sass */
 #header, #footer,
 #sidebar-first,
 #sidebar-second,
 #navigation {
   background: rgba(170, 170, 170, 0.2); }
 
-/* line 108, ../../sass/layout/_layout--grid.sass */
+/* line 132, ../../sass/layout/_layout--grid.sass */
 #header,
 #footer,
 .mission,

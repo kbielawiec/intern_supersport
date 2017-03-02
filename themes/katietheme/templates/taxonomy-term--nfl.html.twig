@@ -24,35 +24,58 @@
  */
 #}
 {#{{ dump() }}#}
-{#{{ dump(_context|keys ) }}#}
-{#{{ kint(recent_post|keys) }}#}
-<div{{ attributes }} class="vocab-square">
-  {{ title_prefix }}
-  {% if not page %}
-    {#<h2><a href="{{ url }}">{{ name }}</a></h2>#}
-      <table class="term">
-          <tr>
-              <td class="team-logo">{{ content.field_team_logo }}</td>
-              <td>
-                  <h3 class="team-name"><a href="{{ url }}">{{ name }}</a></h3>
-                  <p class="tax-term">{{ term.bundle }}</p>
-              </td>
-          </tr>
-          <tr>
-              <td class="fav-button" colspan="2">
-                <button class="favorites" onclick=''>
-                Add Favorite
-                </button>
-              </td>
-          </tr>
-          <tr>
+{#{{ kint(_context) }}#}
+{#{{ kint(content) }}#}
+{#<div{{ attributes }} class="vocab-square">#}
+  {#{{ title_prefix }}#}
+  {#{% if not page %}#}
+      {#<table class="term">#}
+          {#<tr>#}
+              {#<td class="team-logo">{{ content.field_team_logo }}</td>#}
+              {#<td>#}
+                  {#<h3 class="team-name"><a href="{{ url }}">{{ name }}</a></h3>#}
+                  {#<p class="tax-term">{{ term.bundle }}</p>#}
+              {#</td>#}
+          {#</tr>#}
+          {#<tr>#}
+              {#<td class="fav-button" colspan="2">#}
+                  {#<button class="favorites">#}
+                    {#{{ content.flag_favor }}#}
+                  {#</button>#}
+              {#</td>#}
+          {#</tr>#}
+          {#<tr>#}
 
-              <td colspan="2">
+              {#<td colspan="2">#}
                   {#<a href="{{ path('entity.node.canonical', {'node': recent_post_id }) }}">{{ recent_post }}</a>#}
-                  <a href="{{ recent_post_url }}">{{ recent_post }}</a>
+                  {#<a href="{{ recent_post_url }}">{{ recent_post }}</a>#}
 
-              </td>
-      </table>
+              {#</td>#}
+      {#</table>#}
 
-  {% endif %}
+  {#{% endif %}#}
+{#</div>#}
+
+<div{{ attributes }} class="vocab-square">
+    {{ title_prefix }}
+    {% if not page %}
+        <div class="term col-12">
+            <div class="team-info col-12">
+                <div class="team-logo col-4">{{ content.field_team_logo }}</div>
+                <div class="team-name-vocab col-8">
+                    <h3 class="team-name"><a href="{{ url }}">{{ name }}</a></h3>
+                    <p class="tax-term">{{ term.bundle }}</p>
+                </div>
+            </div>
+            <div class="col-12 fav-button">
+                <button class="favorites">
+                    {{ content.flag_favor }}
+                </button>
+            </div>
+            <div class="recent-article col-12">
+                {#<a href="{{ path('entity.node.canonical', {'node': recent_post_id }) }}">{{ recent_post }}</a>#}
+                <a href="{{ recent_post_url }}">{{ recent_post }}</a>
+            </div>
+
+    {% endif %}
 </div>

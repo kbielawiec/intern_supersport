@@ -12,6 +12,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Component\Utility\UrlHelper;
 use \Drupal\node\Entity\Node;
 use Drupal\Core\Entity\ContentEntityStorageBase;
+use Drupal\Core\Url;
 
 
 
@@ -45,7 +46,7 @@ class CaseStudiesForm extends FormBase {
         foreach ($html->find('div[class*=views-field-field-photo]') as $project) {
             // echo("Outer loop $n <br>"); //currently looping 21 times
             $n = $n + 1;
-            //for every link in the case study (should only be one, try to get rid of the nested loops
+            // for every link in the case study
             foreach ($project->find('a') as $url) {
                 //$url = $project->find('a'); //this produces an array which is an invalid argument
                 //echo("Inner loop $m <br>"); //currently looping 21 times
@@ -93,7 +94,8 @@ class CaseStudiesForm extends FormBase {
                     'body' => strip_tags($b_text),
                     'success' => strip_tags($s_text)
                 );
-                $options[] = $rows; //append the newly collected data to options
+                //append the newly collected data to options
+                $options[] = $rows;
 
 
             }
@@ -122,6 +124,13 @@ class CaseStudiesForm extends FormBase {
     /**
      * {@inheritdoc}
      * Optional.
+     *
+     * @param array $form
+     *  The form being validated.
+     * @param \Drupal\Core\Form\FormStateInterface $form_state
+     *  The state of the form.
+     *
+     * @return null
      */
     public function validateForm(array &$form, FormStateInterface $form_state)
     {
@@ -135,32 +144,40 @@ class CaseStudiesForm extends FormBase {
      * Form being submitted.
      * @param \Drupal\Core\Form\FormStateInterface $form_state
      * State of the form.
+     *
+     * @return null
      */
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
         $t = "default";
         $complete_form = &$form_state->getCompleteForm();
         $all_rows = &$form_state->getValues();
+        // keeps track of the current index
         $i = 0;
         foreach ($all_rows['table'] as $value) {
             if ($all_rows['table'][$i] != 0) {
                 $t = $complete_form['table']['#options'][$i]['title'];
                 $b = $complete_form['table']['#options'][$i]['body'];
                 $s = $complete_form['table']['#options'][$i]['success'];
-                $node = Node::create(array(
+                $node = Node::create(
+                    array(
                     'type' => 'myform',
                     'title' => $t,
                     'body' => $b,
                     'field_success' => $s,
                     'status' => 1,
                     'promoted' => 1
-                  )
+                    )
                 );
                 $node->save();
             }
-            $i++; // keeps track of the current index
+            $i++;
         }
-        $form_state->setRedirect('<front>'); // redirect back to homepage after submit
+         // redirect back to homepage after submit
+          $redirect_path = "/node";
+          $url = url::fromUserInput($redirect_path);
+          $form_state->setRedirectUrl($url);
+        return;
     }
 
 }

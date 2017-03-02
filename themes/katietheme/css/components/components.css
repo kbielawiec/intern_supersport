@@ -89,3 +89,30 @@ li.menu-item {
   /* line 4, ../../sass/components/_pager.sass */
   .pager__item a {
     display: inline-block; }
+
+/* line 2, ../../sass/components/_sidebar.sass */
+#sidebar-first .term {
+  padding: 10px;
+  background-color: whitesmoke; }
+/* line 5, ../../sass/components/_sidebar.sass */
+#sidebar-first .team-logo {
+  display: inline-block;
+  float: left;
+  vertical-align: center; }
+/* line 9, ../../sass/components/_sidebar.sass */
+#sidebar-first .team-name-vocab {
+  display: inline-block; }
+  /* line 11, ../../sass/components/_sidebar.sass */
+  #sidebar-first .team-name-vocab p.tax-term {
+    text-transform: uppercase;
+    vertical-align: top;
+    display: inline-block;
+    padding: 0; }
+  /* line 16, ../../sass/components/_sidebar.sass */
+  #sidebar-first .team-name-vocab div.quickedit-field {
+    display: inline-block;
+    padding: 0; }
+  /* line 19, ../../sass/components/_sidebar.sass */
+  #sidebar-first .team-name-vocab h3.team-name {
+    margin: 0;
+    padding: 0; }
